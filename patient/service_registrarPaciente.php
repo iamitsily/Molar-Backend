@@ -1,14 +1,19 @@
 <?php
 
-include 'conexion.php';
+include '../conexion.php';
 
-$id = $_POST['id'];
+//$id = $_POST['id'];
 $nombre = $_POST['nombre'];
-$apellido = $_POST['apellido'];
-$edad = $_POST['edad'];
+$apellido_paterno = $_POST['apellido_paterno'];
+$apellido_materno = $_POST['apellido_materno'];
+$email = $_POST['email'];
+$telefono = $_POST['telefono'];
+$rol = $_POST['rol'];
+$sexo = $_POST['sexo'];
+$PassWrd = $_POST['PassWrd'];
 
-$consulta = "INSERT INTO users (id, Nombre, Apellidos, Edad) VALUES (?, ?, ?, ?)";
-$params = array($id, $nombre, $apellido, $edad);
+$consulta = "INSERT INTO usuario (Nombre, ApellidoPaterno, ApellidoMaterno, Email, Telefono, Rol, Sexo, PassWrd) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+$params = array($nombre, $apellido_paterno, $apellido_materno, $email, $telefono, $rol, $sexo, $PassWrd);
 $stmt = sqlsrv_prepare($conexion, $consulta, $params);
 
 if (sqlsrv_execute($stmt) === false) {
