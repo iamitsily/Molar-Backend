@@ -18,7 +18,7 @@ $serverName = "tcp:hakumolarserver.database.windows.net,1433";
 try{
     $conexion = sqlsrv_connect($serverName, $connectionInfo);
     if ($conexion) {
-        echo "Conexión exitosa :D";
+        echo "Conexión exitosa :D\n";
     }
 }catch(Exception $e){
     echo "Error de conexión".$e;
