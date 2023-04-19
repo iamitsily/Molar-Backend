@@ -2,15 +2,14 @@
 
 include '../conexion.php';
 
-$id = $_POST['id']; 
+$idCita = $_POST['idCita']; 
 $status = $_POST['status'];
 
 //Query
-$consulta = "UPDATE usuario SET (status) WHERE id = $id VALUES(?)";
+$consulta = "UPDATE cita SET (status) WHERE id = $idCita VALUES(?)";
     $stmt = sqlsrv_prepare($conexion, $consulta, $status);
 
     if (sqlsrv_execute($stmt) === false) {
-        //No existe el registro
         die(print_r(sqlsrv_errors(), true));
     }
 
