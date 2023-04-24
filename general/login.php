@@ -3,9 +3,9 @@
 include '../conexion.php';
 
 //$consulta = "SELECT * FROM dbo.usuario";
-$id = $_POST['id'];
+$matricula = $_POST['matricula'];
 
-$consulta = "SELECT matricula, password from dbo.usuario WHERE matricula = $id";
+$consulta = "SELECT * from dbo.usuario WHERE matricula = $matricula AND status=1";
 $stmt = sqlsrv_query($conexion, $consulta);
 
 //guarda la consulta 
@@ -14,11 +14,16 @@ if ($stmt === false) {
 }
 
 $usuarios = array();
-while ($usuario = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-    $usuarios[] = $usuario;
+$usuarios['datos'] =array();
+while ($row = sqlsrv_fetch_array($stmt)) {
+    $index['matricula'] =$row['0'];
+    $index['nombre'] =$row['1']; 
+    $index['password'] =$row['8'];
+    //rol
+    array_push($usuarios['datos'], $index);
 }
-
-echo json_encode($usuarios, JSON_UNESCAPED_UNICODE);
+$usuarios["exito"]="1";
+echo json_encode($usuarios);
 
 sqlsrv_free_stmt($stmt); //libera la memoria asociada con el resultado de la consulta SQL
 sqlsrv_close($conexion);
