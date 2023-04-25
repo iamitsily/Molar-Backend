@@ -2,12 +2,26 @@
 
 include '../conexion.php';
 
-$idCita = $_POST['idCita'];
+$idCita = $_POST['id'];
 $dia = $_POST['dia'];
 $hora = $_POST['hora'];
 $motivo = $_POST['motivo'];
 $estado = $_POST['estado'];
 $status = $_POST['status'];
+
+$params = array($dia, $hora, $motivo, $estado, $status);
+$consulta = "UPDATE cita SET dia = (?), hora = (?), motivo = (?), estado = (?), status = (?) WHERE id = $idCita";
+$stmt = sqlsrv_prepare($conexion, $consulta, $params);
+
+if (sqlsrv_execute($stmt) === false) {
+    echo "Modificacion fallida";
+    die(print_r(sqlsrv_errors(), true));
+
+}else{
+    echo "Modificacion exitosa";
+}
+sqlsrv_close($conexion);
+/*
 //---------------------------------
 //Modificacion del dia
 if(isset($dia)){
@@ -77,7 +91,6 @@ if(isset($status)){
         die(print_r(sqlsrv_errors(), true));
     }
 }
-echo "Modificacion exitosa";
-sqlsrv_close($conexion);
+*/
 
 ?>
