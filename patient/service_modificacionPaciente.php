@@ -2,15 +2,32 @@
 
 include '../conexion.php';
 
-$id = $_POST['id'];
+$matricula = $_POST['matricula'];
 $nombre = $_POST['nombre'];
 $apellido_paterno = $_POST['apellido_paterno'];
 $apellido_materno = $_POST['apellido_materno'];
 $email = $_POST['email'];
 $telefono = $_POST['telefono'];
+$rol = $_POST['rol'];
 $sexo = $_POST['sexo'];
-$PassWrd = $_POST['PassWrd'];
+$password = $_POST['password'];
 
+$params = array($nombre, $apellido_paterno, $apellido_materno, $email, $telefono, $rol, $sexo, $password);
+//$consulta = "UPDATE usuario SET nombre, apellido_paterno, apellido_materno, email, telefono, rol, sexo, password WHERE matricula = $matricula VALUES (?,?,?,?,?,?,?)";
+$consulta = "UPDATE usuario SET nombre = (?), apellidoPaterno = (?), apellidoMaterno = (?), email = (?), telefono = (?), rol = (?), sexo = (?), password = (?) WHERE matricula = $matricula";
+
+$stmt = sqlsrv_prepare($conexion, $consulta, $params);
+
+
+if(sqlsrv_execute($stmt) === false){
+    echo "Modificacion fallida";
+    die(print_r(sqlsrv_errors(), true));
+}else{
+    echo "Modificacion exitosa";
+}
+sqlsrv_close($conexion);
+
+/*
 //---------------------------------
 //Modificacion de nombre
 if(isset($nombre)){
@@ -52,6 +69,7 @@ if(isset($apellido_materno)){
         die(print_r(sqlsrv_errors(), true));
     }
 }
+
 
 //---------------------------------
 //Modificacion de email
@@ -109,8 +127,7 @@ if(isset($PassWrd)){
     }
 }
 //---------------------------------
+*/
 
-echo "Modificacion exitosa";
-sqlsrv_close($conexion);
 
 ?>

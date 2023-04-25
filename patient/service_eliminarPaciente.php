@@ -2,18 +2,18 @@
 
 include '../conexion.php';
 
-$id = $_POST['id']; 
+$matricula = $_POST['matricula']; 
 $status = $_POST['status'];
-
+$params = array($status);
 //Query
-$consulta = "UPDATE usuario SET (status) WHERE id = $id VALUES(?)";
-    $stmt = sqlsrv_prepare($conexion, $consulta, $status);
+$consulta = "UPDATE usuario SET status = (?) WHERE matricula = $matricula";
+    $stmt = sqlsrv_prepare($conexion, $consulta, $params);
 
     if (sqlsrv_execute($stmt) === false) {
-        //No existe el registro
+        echo  "Eliminacion fallida";
         die(print_r(sqlsrv_errors(), true));
+    }else{
+        echo "Eliminación exitosa";
     }
-
-    echo "Eliminación exitosa";
     sqlsrv_close($conexion);
 ?>
