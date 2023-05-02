@@ -1,7 +1,7 @@
 <?php
 
 include '../conexion.php';
-
+/*
 $matricula = $_POST['matricula'];
 $nombre = $_POST['nombre'];
 $apellido_paterno = $_POST['apellido_paterno'];
@@ -11,11 +11,19 @@ $telefono = $_POST['telefono'];
 $rol = $_POST['rol'];
 $sexo = $_POST['sexo'];
 $password = $_POST['password'];
+*/
 
-$params = array($nombre, $apellido_paterno, $apellido_materno, $email, $telefono, $rol, $sexo, $password);
+$matricula = $_POST['matricula'];
+$email = $_POST['email'];
+$telefono = $_POST['telefono'];
+$password = $_POST['password'];
+
+//$params = array($nombre, $apellido_paterno, $apellido_materno, $email, $telefono, $rol, $sexo, $password);
+$params = array($email, $telefono, $password);
+
 //$consulta = "UPDATE usuario SET nombre, apellido_paterno, apellido_materno, email, telefono, rol, sexo, password WHERE matricula = $matricula VALUES (?,?,?,?,?,?,?)";
-$consulta = "UPDATE usuario SET nombre = (?), apellidoPaterno = (?), apellidoMaterno = (?), email = (?), telefono = (?), rol = (?), sexo = (?), password = (?) WHERE matricula = $matricula";
-
+//$consulta = "UPDATE usuario SET nombre = (?), apellidoPaterno = (?), apellidoMaterno = (?), email = (?), telefono = (?), rol = (?), sexo = (?), password = (?) WHERE matricula = $matricula";
+$consulta = "UPDATE usuario SET email = (?), telefono = (?), password = (?) WHERE matricula = $matricula";
 $stmt = sqlsrv_prepare($conexion, $consulta, $params);
 
 
