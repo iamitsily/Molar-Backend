@@ -9,11 +9,13 @@ $motivo=$_POST['motivo'];
 $estado=$_POST['estado'];
 $status=$_POST['status'];
 $idUsuario=$_POST['idUsuario'];
+$descripcion=$_POST['descripcion'];
 
 
 
-$consulta = "INSERT INTO cita (id, dia, hora, motivo, estado, status, idUsuario) values (?,?,?,?,?,?,?)"; 
-$params = array(dia,hora,motivo,estado,status);
+
+$consulta = "INSERT INTO cita (id, dia, hora, motivo, estado, status, idUsuario,descripcion) values (?,?,?,?,?,?,?,?)"; 
+$params = array($id,$dia,$hora,$motivo,$estado,$status,$idUsuario, $descripcion);
 $stmt = sqlsrv_prepare($conexion, $consulta, $params);
 
 if (sqlsrv_execute($stmt) === false) {
