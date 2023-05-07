@@ -8,9 +8,10 @@ $hora = $_POST['hora'];
 $motivo = $_POST['motivo'];
 $estado = $_POST['estado'];
 $status = $_POST['status'];
+$descripcion=$_POST['descripcion'];
 
-$params = array($dia, $hora, $motivo, $estado, $status);
-$consulta = "UPDATE cita SET dia = (?), hora = (?), motivo = (?), estado = (?), status = (?) WHERE id = $idCita";
+$params = array($dia, $hora, $motivo, $estado, $status,$descripcion);
+$consulta = "UPDATE cita SET dia = (?), hora = (?), motivo = (?), estado = (?), status = (?), descripcion = (?) WHERE id = $idCita";
 $stmt = sqlsrv_prepare($conexion, $consulta, $params);
 
 if (sqlsrv_execute($stmt) === false) {
