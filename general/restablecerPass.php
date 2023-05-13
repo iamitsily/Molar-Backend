@@ -2,12 +2,12 @@
 
 include '../conexion.php';
 
-$matricula = $_POST['matricula'];
+$email = $_POST['email'];
 $password = $_POST['password'];
 
 $params = array($password);
 
-$consulta = "UPDATE usuario SET password = (?) WHERE matricula = $matricula";
+$consulta = "UPDATE usuario SET password = (?) WHERE email = '$email'";
 $stmt = sqlsrv_prepare($conexion, $consulta, $params);
 
 
