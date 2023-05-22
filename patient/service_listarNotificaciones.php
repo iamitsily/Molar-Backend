@@ -26,7 +26,7 @@ while ($row = sqlsrv_fetch_array($stmt)) {
     $index['Leida'] = $row['Leida'];
     $index['Fecha'] = $row['Fecha'];
     $index['matricula'] = $row['matricula'];
-
+    /*
     // Marcar la notificación como leída
     $idNotificacion = $row['IdNotificacion'];
     $marcarLeida = "UPDATE dbo.notificaciones SET Leida = 1 WHERE matricula = '$matricula' AND idNotificacion = $idNotificacion";
@@ -35,7 +35,7 @@ while ($row = sqlsrv_fetch_array($stmt)) {
     if ($stmtMarcarLeida === false) {
         die(print_r(sqlsrv_errors(), true));
     }
-
+        */
     array_push($notificaciones['datos'], $index);
 }
 
