@@ -20,6 +20,7 @@ while ($row = sqlsrv_fetch_array($stmt)) {
     $index['nombre'] =$row['1']; 
     $index['password'] =$row['7'];
     $index['rol'] = $row['9'];
+    $index['sexo'] = $row['6'];
     //rol
     array_push($usuarios['datos'], $index);
 }
