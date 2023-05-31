@@ -14,7 +14,7 @@ if ($stmt === false) {
         $index['NumUsuario'] =$row['0'];
         array_push($usuarios['datos'], $index);
     }
-    $consulta = "SELECT COUNT(*) as NumMedico FROM medico WHERE status=1";
+    $consulta = "SELECT COUNT(*) as NumMedico FROM cita WHERE estado=4";
     $stmt = sqlsrv_query($conexion, $consulta);
     if ($stmt === false) {
         die(print_r(sqlsrv_errors(), true));
