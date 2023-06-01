@@ -1,31 +1,42 @@
-<?php 
+<?php
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/PHPMailerAutoload.php';
-    
+require 'Exception.php';
+require 'PHPMailer.php';
+require 'SMTP.php';
+
 $destino = $_POST['destino'];
-$asunto = $_POST['destino'];
-$mensaje = $_POST['destino'];
-// Configuración del servidor SMTP y autenticación
-$mail = new PHPMailer;
-$mail->isSMTP();
-$mail->Host = 'smtp.gmail.com';
-$mail->Port = 587;
-$mail->SMTPSecure = 'tls';
-$mail->SMTPAuth = true;
-$mail->Username = 'molar.haku@gmail.com';
-$mail->Password = 'webysycthvywcvlf';
+$asunto = $_POST['asunto'];
+$mensaje = $_POST['mensaje'];
 
-// Configuración de los detalles del correo electrónico
-$mail->setFrom('molar.haku@gmail.com', 'Remitente');
-$mail->addAddress($destino, 'Destinatario');
-$mail->Subject = $asunto;
-$mail->Body = $mensaje;
+//Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
 
-// Envío del correo electrónico
-if ($mail->send()) {
-    echo "Correo electrónico enviado correctamente";
-} else {
-    echo "Error al enviar el correo electrónico: " . $mail->ErrorInfo;
+try {
+    //Server settings
+    $mail->SMTPDebug = 0;                      //Enable verbose debug output
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    $mail->Username   = 'molar.haku@gmail.com';                     //SMTP username
+    $mail->Password   = 'webysycthvywcvlf';                               //SMTP password
+    $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption PHPMailer::ENCRYPTION_SMTPS
+    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+    //Recipients
+    $mail->setFrom('molar.haku@gmail.com', 'Molar');
+    $mail->addAddress($destino);     //Add a recipient
+
+    //Content
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = $asunto;
+    $mail->Body    = $mensaje;
+
+    $mail->send();
+    echo 'Enviado correctamente';
+} catch (Exception $e) {
+    echo "Error al enviar: {$mail->ErrorInfo}";
 }
-
-?>
