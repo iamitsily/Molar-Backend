@@ -5,7 +5,7 @@ include '../conexion.php';
 //$consulta = "SELECT * FROM dbo.usuario";
 $matricula = $_POST['matricula'];
 
-$consulta = "SELECT * from cita WHERE idUsuario = $matricula AND status=1";
+$consulta = "SELECT * from cita WHERE idUsuario = $matricula AND status=1 AND estado=1";
 $stmt = sqlsrv_query($conexion, $consulta);
 
 //guarda la consulta 
