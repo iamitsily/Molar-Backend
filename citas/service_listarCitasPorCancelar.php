@@ -2,7 +2,7 @@
 
 include '../conexion.php';
 
-$consulta = "SELECT * from cita WHERE estado = '4' AND status=1";
+$consulta = "SELECT cita.id, cita.dia, cita.hora, cita.motivo, cita.estado, cita.descripcion, cita.motivoCancelar, usuario.nombre, usuario.apellidoPaterno, usuario.email from cita JOIN usuario ON cita.idUsuario = usuario.matricula WHERE cita.estado = '4' AND cita.status=1";
 $stmt = sqlsrv_query($conexion, $consulta);
 
 //guarda la consulta 
@@ -18,9 +18,11 @@ while ($row = sqlsrv_fetch_array($stmt)) {
     $index['hora'] =$row['2'];
     $index['motivo'] = $row['3'];
     $index['estado'] = $row['4'];
-    $index['descripcion'] = $row['8'];
-    $index['motivoCancelar'] = $row['9'];
-
+    $index['descripcion'] = $row['5'];
+    $index['motivoCancelar'] = $row['6'];
+    $index['nombre'] = $row['7'];
+    $index['apellidoPaterno'] = $row['8'];
+    $index['email'] = $row['9'];
     //rol
     array_push($usuarios['datos'], $index);
 }
