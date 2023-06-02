@@ -4,7 +4,7 @@ include '../conexion.php';
 
 $matricula = $_POST['matricula'];
 
-$consulta = "SELECT cita.id, cita. dia, cita.hora, cita.motivo, medico.nombre, medico.apellidoPaterno from cita JOIN medico ON cita.idMedico=medico.matricula WHERE cita.idUsuario = $matricula AND cita.status=1";
+$consulta = "SELECT cita.id, cita. dia, cita.hora, cita.motivo, medico.nombre, medico.apellidoPaterno from cita JOIN medico ON cita.idMedico=medico.matricula WHERE cita.idUsuario = '$matricula' AND cita.status=1 AND cita.estado IN (1,3,4) ";
 $stmt = sqlsrv_query($conexion, $consulta);
 
 //guarda la consulta 
