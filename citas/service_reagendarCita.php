@@ -7,6 +7,7 @@ $dia = $_POST['dia'];
 $hora = $_POST['hora'];
 $estado = $_POST['estado'];
 $motivo = $_POST['motivo'];
+$matricula = $_POST['matricula'];
 
 $params = array($dia, $hora, $estado, $motivo);
 $consulta = "UPDATE cita SET dia = (?), hora = (?), estado = (?), motivoReagendar = (?) WHERE id = '$idCita'";
@@ -19,5 +20,19 @@ if (sqlsrv_execute($stmt) === false) {
 }else{
     echo "Modificacion exitosa";
 }
+
+$consultaTolerancia = "SELECT tolerancia from usuario where matricula = '$matricula'";
+$resultadoObtenerTolerancia = sqlsrv_query($conexion, $consultaTolerancia);
+// Obtener el valor de tolerancia actual
+$row = sqlsrv_fetch_array($resultadoObtenerTolerancia, SQLSRV_FETCH_ASSOC);
+$toleranciaActual = $row['tolerancia'];
+
+// Sumarle 1 a la tolerancia actual
+$nuevaTolerancia = $toleranciaActual + 1;
+
+// Actualizar el campo tolerancia con el nuevo valor
+$sqlActualizarTolerancia = "UPDATE usuario SET tolerancia = '$nuevaTolerancia' WHERE matricula = '$matricula'";
+$resultadoActualizarTolerancia = sqlsrv_query($conexion, $sqlActualizarTolerancia);
+
 sqlsrv_close($conexion);
 ?>
