@@ -5,7 +5,7 @@ include '../conexion.php';
 //$consulta = "SELECT * FROM dbo.usuario";
 $matricula = $_POST['matricula'];
 
-$consulta = "SELECT * from usuario WHERE matricula = $matricula AND status=1";
+$consulta = "SELECT matricula, nombre, password, rol, sexo, tolerancia from usuario WHERE matricula = $matricula AND status=1";
 $stmt = sqlsrv_query($conexion, $consulta);
 
 //guarda la consulta 
@@ -18,9 +18,10 @@ $usuarios['datos'] =array();
 while ($row = sqlsrv_fetch_array($stmt)) {
     $index['matricula'] =$row['0'];
     $index['nombre'] =$row['1']; 
-    $index['password'] =$row['7'];
-    $index['rol'] = $row['9'];
-    $index['sexo'] = $row['6'];
+    $index['password'] =$row['2'];
+    $index['rol'] = $row['3'];
+    $index['sexo'] = $row['4'];
+    $index['tolerancia'] = $row['5'];
     //rol
     array_push($usuarios['datos'], $index);
 }
