@@ -4,7 +4,7 @@ include '../conexion.php';
 
 //$consulta = "SELECT * FROM dbo.usuario";
 
-$consulta = "SELECT * FROM usuario WHERE status = '1'";
+$consulta = "SELECT * FROM usuario WHERE status = '1' AND rol = 1";
 $stmt = sqlsrv_query($conexion, $consulta);
 
 //guarda la consulta 
