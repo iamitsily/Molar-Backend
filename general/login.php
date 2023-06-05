@@ -5,7 +5,9 @@ include '../conexion.php';
 //$consulta = "SELECT * FROM dbo.usuario";
 $matricula = $_POST['matricula'];
 
-$consulta = "SELECT matricula, nombre, password, rol, sexo, tolerancia from usuario WHERE matricula = $matricula AND status=1";
+$consulta = "SELECT matricula, nombre, password, rol, sexo, tolerancia FROM usuario WHERE matricula = '$matricula' AND status = 1
+UNION
+SELECT matricula, nombre, password, rol, sexo, tolerancia FROM medico WHERE matricula = '$matricula' AND status = 1";
 $stmt = sqlsrv_query($conexion, $consulta);
 
 //guarda la consulta 
