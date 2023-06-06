@@ -3,13 +3,11 @@
 include '../conexion.php';
 
 $matricula = $_POST['matricula'];
-$email = $_POST['email'];
-$telefono = $_POST['telefono'];
-$password = $_POST['password'];
+$sexo = $_POST['sexo'];
+$params = array($sexo);
 
-$params = array($email, $telefono, $password);
 
-$consulta = "UPDATE medico SET email = (?), telefono = (?), password = (?) WHERE matricula = $matricula";
+$consulta = "UPDATE medico SET sexo = (?) WHERE matricula = $matricula";
 $stmt = sqlsrv_prepare($conexion, $consulta, $params);
 
 
