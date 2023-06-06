@@ -4,7 +4,7 @@ include '../conexion.php';
 
 $idCita = $_POST['idCita'];
 
-$consulta = "SELECT cita.id, cita. dia, cita.hora, cita.motivo, usuario.nombre, usuario.apellidoPaterno, usuario.matricula from cita JOIN usuario ON cita.idUsuario=usuario.matricula WHERE cita.id = '$idCita' AND cita.status=1";
+$consulta = "SELECT cita.id, cita. dia, cita.hora, cita.motivo, usuario.nombre, usuario.apellidoPaterno, usuario.matricula, usuario.sexo from cita JOIN usuario ON cita.idUsuario=usuario.matricula WHERE cita.id = '$idCita' AND cita.status=1";
 $stmt = sqlsrv_query($conexion, $consulta);
 
 //guarda la consulta 
@@ -22,6 +22,7 @@ while ($row = sqlsrv_fetch_array($stmt)) {
     $index['nombre'] = $row['4'];
     $index['apellidoPaterno'] = $row['5'];
     $index['matricula'] = $row['6'];
+    $index['sexo'] = $row['7'];
     //rol
     array_push($usuarios['datos'], $index);
 }
