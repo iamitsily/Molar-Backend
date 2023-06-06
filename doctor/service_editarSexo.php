@@ -7,7 +7,7 @@ $sexo = $_POST['sexo'];
 $params = array($sexo);
 
 
-$consulta = "UPDATE medico SET sexo = (?) WHERE matricula = $matricula";
+$consulta = "UPDATE medico SET sexo = (?) WHERE matricula = '$matricula'";
 $stmt = sqlsrv_prepare($conexion, $consulta, $params);
 
 
