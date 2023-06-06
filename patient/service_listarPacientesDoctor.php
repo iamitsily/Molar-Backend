@@ -4,7 +4,8 @@ include '../conexion.php';
 
 $matricula = $_POST['matricula'];
 
-$consulta = "SELECT usuario.matricula, usuario.nombre, usuario.apellidoPaterno, usuario.apellidoMaterno, usuario.email, usuario.sexo from cita JOIN usuario ON cita.idUsuario = usuario.matricula where cita.idMedico = '$matricula'";
+$consulta = "SELECT DISTINCT usuario.matricula, usuario.nombre, usuario.apellidoPaterno, usuario.apellidoMaterno, usuario.email, usuario.sexo FROM cita JOIN usuario ON cita.idUsuario = usuario.matricula WHERE cita.idMedico = '$matricula'
+";
 $stmt = sqlsrv_query($conexion, $consulta);
 
 //guarda la consulta 
