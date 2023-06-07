@@ -9,7 +9,8 @@ $connectionInfo = array(
     "Database" => "hakumolardb", 
     "LoginTimeout" => 30, 
     "Encrypt" => 1, 
-    "TrustServerCertificate" => 0);
+    "TrustServerCertificate" => 0,
+    "CharacterSet" => "UTF-8");
 
 //Nombre del servidor
 $serverName = "tcp:hakumolarserver.database.windows.net,1433";
