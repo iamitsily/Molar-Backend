@@ -5,10 +5,12 @@ include '../conexion.php';
 $usuarios = array();
 $usuarios['datos'] =array();
 $mes = $_POST['mes'];
+$year = $_POST['year'];
 //Numero de usuarios pacientes
 $consulta = "SELECT id, dia, hora, motivo, descripcion, estado, idUsuario, idMedico
 FROM [dbo].[cita]
-WHERE MONTH(CONVERT(datetime, dia, 105)) = '$mes'";
+WHERE MONTH(CONVERT(datetime, dia, 105)) = '$mes'
+AND YEAR(CONVERT(datetime, dia, 105)) = '$year'";
 $stmt = sqlsrv_query($conexion, $consulta);
 
 if ($stmt === false) {
