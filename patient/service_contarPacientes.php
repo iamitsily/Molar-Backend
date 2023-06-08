@@ -4,7 +4,7 @@ include '../conexion.php';
 
 $usuarios = array();
 $usuarios['datos'] =array();
-$consulta = "SELECT COUNT(*) as NumUsuario FROM usuario WHERE status=1";
+$consulta = "SELECT COUNT(*) as NumUsuario FROM usuario WHERE status=1 and rol = '1'";
 $stmt = sqlsrv_query($conexion, $consulta);
 
 if ($stmt === false) {
