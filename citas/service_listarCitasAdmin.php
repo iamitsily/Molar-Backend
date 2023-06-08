@@ -28,6 +28,22 @@ while ($row = sqlsrv_fetch_array($stmt)) {
     //rol
     array_push($usuarios['datos'], $index);
 }
+
+// Ordenar los registros por la columna "dia" utilizando el algoritmo de ordenamiento de burbuja
+$n = count($usuarios['datos']);
+for ($i = 0; $i < $n - 1; $i++) {
+    for ($j = 0; $j < $n - $i - 1; $j++) {
+        $fechaActual = DateTime::createFromFormat('d/m/Y', $usuarios['datos'][$j]['dia']);
+        $fechaSiguiente = DateTime::createFromFormat('d/m/Y', $usuarios['datos'][$j + 1]['dia']);
+        if ($fechaActual > $fechaSiguiente) {
+            // Intercambiar los registros si están en el orden incorrecto
+            $temp = $usuarios['datos'][$j];
+            $usuarios['datos'][$j] = $usuarios['datos'][$j + 1];
+            $usuarios['datos'][$j + 1] = $temp;
+        }
+    }
+}
+
 $usuarios["exito"]="1";
 echo json_encode($usuarios);
 
