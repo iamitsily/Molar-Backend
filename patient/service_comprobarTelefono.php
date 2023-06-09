@@ -17,11 +17,6 @@ $usuarios = array();
 $usuarios['datos'] =array();
 while ($row = sqlsrv_fetch_array($stmt)) {
     $index['matricula'] =$row['0'];
-    $index['nombre'] =$row['1']; 
-    $index['password'] =$row['2'];
-    $index['rol'] = $row['3'];
-    $index['sexo'] = $row['4'];
-    $index['tolerancia'] = $row['5'];
     //rol
     array_push($usuarios['datos'], $index);
 }
