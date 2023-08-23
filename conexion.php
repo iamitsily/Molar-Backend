@@ -6,14 +6,14 @@
 $connectionInfo = array(
     "UID" => "HakuMolarAdmon",
     "pwd" => "{H4kuM0l4r#4dm1n}", 
-    "Database" => "hakumolardb", 
+    "Database" => "molarinsano", 
     "LoginTimeout" => 30, 
     "Encrypt" => 1, 
     "TrustServerCertificate" => 0,
     "CharacterSet" => "UTF-8");
 
 //Nombre del servidor
-$serverName = "tcp:hakumolarserver.database.windows.net,1433";
+$serverName = "tcp:molarinsano-server.database.windows.net,1433";
 
 //Conexión y revisión de conexión
 try{
